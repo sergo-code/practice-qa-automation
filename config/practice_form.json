@@ -1,0 +1,21 @@
+{
+  "0": {
+    "first_name": "sergo",
+    "last_name": "code",
+    "email": "s.ivanoff071@gmail.com",
+    "gender": "Male",
+    "number": "9123456789",
+    "date_of_birth": {
+      "year": "1900",
+      "month": "January",
+      "day": "1"
+    },
+    "_date_of_birth": "01 January,1900",
+    "subjects": ["English"],
+    "hobbies": {"1": "Sports", "3": "Music"},
+    "file": "image.jpeg",
+    "address": "749 Tatum Street Hamline - Midway Ramsey County Minnesota 55104 USA",
+    "state": "NCR",
+    "city": "Noida"
+  }
+}

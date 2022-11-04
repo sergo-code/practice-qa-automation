@@ -13,13 +13,15 @@ class DemoQA:
         self.driver = driver
         self.base_url += path
 
-    def find_element(self, locator, time=10):
+    def find_element(self, locator, element=False, time=10):
         message = f"Can't find element by locator {locator}"
-        return WebDriverWait(self.driver, time).until(EC.presence_of_element_located(locator), message=message)
+        _element = element if element else self.driver
+        return WebDriverWait(_element, time).until(EC.presence_of_element_located(locator), message=message)
 
-    def find_elements(self, locator, time=10):
+    def find_elements(self, locator, element=False, time=10):
         message = f"Can't find element by locator {locator}"
-        return WebDriverWait(self.driver, time).until(EC.presence_of_all_elements_located(locator), message=message)
+        _element = element if element else self.driver
+        return WebDriverWait(_element, time).until(EC.presence_of_all_elements_located(locator), message=message)
 
     def scroll_to_element(self, elem):
         return self.driver.execute_script("return arguments[0].scrollIntoView(true);", elem)

@@ -1,6 +1,3 @@
-from selenium.webdriver import Keys, ActionChains
-from selenium.webdriver.common.by import By
-
 from .base_page import DemoQA
 from ui.locators.practice_form_locators import FormLocators
 
@@ -24,7 +21,7 @@ class Form(DemoQA):
     def choose_gender(self, gender):
         genders = self.find_elements(FormLocators.LOCATOR_GENDERS_RADIO)
         for gen in genders:
-            if gen.find_element(*FormLocators.LOCATOR_GENDER_RADIO).get_attribute('value') == gender:
+            if self.find_element(FormLocators.LOCATOR_GENDER_RADIO, gen).get_attribute('value') == gender:
                 gen.click()
                 break
 
@@ -48,7 +45,7 @@ class Form(DemoQA):
     def choose_hobbies(self, *hobbies):
         list_hobbies = self.find_elements(FormLocators.LOCATOR_HOBBIES_CHECKBOX)
         for hobbie in list_hobbies:
-            if hobbie.find_element(*FormLocators.LOCATOR_GENDER_RADIO).get_attribute('value') in hobbies[0]:
+            if self.find_element(FormLocators.LOCATOR_GENDER_RADIO, hobbie).get_attribute('value') in hobbies[0]:
                 hobbie.click()
 
     def upload_file(self, file_path):
@@ -65,3 +62,27 @@ class Form(DemoQA):
 
     def send_form(self):
         self.find_element(FormLocators.LOCATOR_BUTTON_SUBMIT).click()
+
+    def set_jsom_form(self, item):
+        return {
+            "Student Name": f"{item['first_name']} {item['last_name']}",
+            "Student Email": item['email'],
+            "Gender": item['gender'],
+            "Mobile": item['number'],
+            "Date of Birth": item['_date_of_birth'],
+            "Subjects": ", ".join(item['subjects']),
+            "Hobbies": ", ".join(list(item['hobbies'].values())),
+            "Picture": item['file'],
+            "Address": item['address'],
+            "State and City": f"{item['state']} {item['city']}"
+        }
+
+    def check_result(self):
+        data = dict()
+        table_body = self.find_element(FormLocators.LOCATOR_TABLE_RESULT)
+        for row in self.find_elements(FormLocators.LOCATOR_TABLE_ROW, table_body):
+            column = self.find_elements(FormLocators.LOCATOR_TABLE_COLUMN, row)
+            data[column[0].text] = column[1].text
+        return data
+
+

@@ -19,3 +19,6 @@ class FormLocators:
     LOCATOR_STATE_SELECT = (By.XPATH, "//input[@id='react-select-3-input']")
     LOCATOR_CITY_SELECT = (By.XPATH, "//input[@id='react-select-4-input']")
     LOCATOR_BUTTON_SUBMIT = (By.XPATH, "//button[@id='submit']")
+    LOCATOR_TABLE_RESULT = (By.XPATH, "//tbody")
+    LOCATOR_TABLE_ROW = (By.XPATH, "tr")
+    LOCATOR_TABLE_COLUMN = (By.XPATH, "td")
